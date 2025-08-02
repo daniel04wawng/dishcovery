@@ -49,7 +49,6 @@ const Index = () => {
     };
 
     try {
-      // ✅ Send JSON to backend API
       const response = await fetch("https://your-backend-api.com/submit", {
         method: "POST",
         headers: {
