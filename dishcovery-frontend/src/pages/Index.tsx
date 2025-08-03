@@ -49,13 +49,6 @@ const Index = () => {
     };
 
     try {
-      const response = await fetch("https://yuvrajsarda.app.n8n.cloud/webhook-test/726bef14-51c6-47a0-a801-134ce8b79527", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(result)
-      });
       const responseprod = await fetch("https://yuvrajsarda.app.n8n.cloud/webhook/726bef14-51c6-47a0-a801-134ce8b79527", {
         method: "POST",
         headers: {
@@ -64,11 +57,28 @@ const Index = () => {
         body: JSON.stringify(result)
       });
 
-      if (!response.ok) {
-        console.error("Failed to send data to backend");
+      if (!responseprod.ok) {
+        console.error("Response not ok");
+        throw new Error("response not ok");
       }
+      
     } catch (error) {
       console.error("Error sending data:", error);
+      try {
+        const responsetest = await fetch("https://yuvrajsarda.app.n8n.cloud/webhook-test/726bef14-51c6-47a0-a801-134ce8b79527", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+          body: JSON.stringify(result)
+        });
+        if (!responseprod.ok) {
+          console.error("Response with test not ok");
+          throw new Error("response with test not ok");
+        }
+      } catch (e) {
+        console.error(e);
+      }     
     }
 
     // Show Thank You screen
