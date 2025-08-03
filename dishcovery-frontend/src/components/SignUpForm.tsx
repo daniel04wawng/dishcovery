@@ -16,6 +16,7 @@ export const SignUpForm = ({ onNext }: SignUpFormProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.email && formData.phone) {
+      console.log("Form submitted:", formData); // ✅ Debugging
       onNext(formData);
     }
   };
@@ -59,15 +60,15 @@ export const SignUpForm = ({ onNext }: SignUpFormProps) => {
               required
             />
           </div>
+
+          {/* ✅ Button moved inside the form */}
+          <Button 
+            type="submit"
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 text-lg pixel-font rounded-lg h-14 mt-12"
+          >
+            Log in
+          </Button>
         </form>
-        
-        {/* Submit Button */}
-        <Button 
-          onClick={handleSubmit}
-          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 text-lg pixel-font rounded-lg h-14 mt-12"
-        >
-          Log in
-        </Button>
       </div>
     </div>
   );
